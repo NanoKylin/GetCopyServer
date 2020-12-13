@@ -1,0 +1,36 @@
+package com.nanokylin.getcopyserver.config;
+
+import com.nanokylin.getcopyserver.GetCopyServer;
+import org.yaml.snakeyaml.Yaml;
+
+import java.io.FileInputStream;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * 用于读取YAML配置文件的类
+ *
+ * @author Hanbings
+ */
+public class YAMLReader {
+    /**
+     * 获取YAML文件转换成 Map<String, String>
+     * @param path YAML路径
+     * @return Map<String, String>
+     */
+    public Map<String, Object> getYamlFileConvertToMap(String path) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            Yaml yaml = new Yaml();
+            URL url = GetCopyServer.class.getClassLoader().getResource(path);
+            if (url != null) {
+                map = yaml.load(new FileInputStream(url.getFile()));
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+}
