@@ -26,8 +26,8 @@ public class MixedController {
         log.info(Language.getText("java_vm_name") + BaseInfo.JAVA_VM_NAME);
         log.info(Language.getText("java_class_version") + BaseInfo.JAVA_CLASS_VERSION);
         log.info(Language.getText("java_class_path") + BaseInfo.JAVA_CLASS_PATH);
-        log.info(Language.getText("cat_paw_server_version") + BaseInfo.CAT_PAW_SERVER_VERSION);
-        log.info(Language.getText("cat_paw_server_build_time") + BaseInfo.CAT_PAW_SERVER_BUILD_TIME);
-        log.info(BaseInfo.CAT_PAW_SERVER_LOGO);
+        log.info(Language.getText("cat_paw_server_version") + BaseInfo.GET_COPY_SERVER_VERSION);
+        log.info(Language.getText("cat_paw_server_build_time") + BaseInfo.GET_COPY_SERVER_BUILD_TIME);
+        log.info(BaseInfo.GET_COPY_SERVER_LOGO);
     }
 }

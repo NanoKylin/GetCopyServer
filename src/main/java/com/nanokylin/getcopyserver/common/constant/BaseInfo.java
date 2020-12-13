@@ -21,17 +21,16 @@ public class BaseInfo {
     //Java类路径
     public static final String JAVA_CLASS_PATH = props.getProperty("java.class.path");
     //CatPawServer版本号
-    public static final String CAT_PAW_SERVER_VERSION = "1.0.0 CAT PAW HANG (Bate)";
+    public static final String GET_COPY_SERVER_VERSION = "1.0.0 GET COPY SERVER (Bate)";
     //CatPawServer构建时间
-    public static final String CAT_PAW_SERVER_BUILD_TIME = "2020/11/02 SAT Hanbings 3219065882@qq.com";
+    public static final String GET_COPY_SERVER_BUILD_TIME = "2020/12/13 SUN Hanbings 3219065882@qq.com";
     //LOGO
-    public static final String CAT_PAW_SERVER_LOGO =
-            "                                                           \n" +
-                    "_________         __ __________                            \n" +
-                    "\\_   ___ \\_____ _/  |\\______   \\_____ __  _  __        \n" +
-                    "/    \\  \\/\\__  \\\\   __\\     ___/\\__  \\\\ \\/ \\/ / \n" +
-                    "\\     \\____/ __ \\|  | |    |     / __ \\\\     /        \n" +
-                    " \\______  (____  /__| |____|    (____  /\\/\\_/           \n" +
-                    "        \\/     \\/                    \\/                   ";
+    public static final String GET_COPY_SERVER_LOGO ="             \n" +
+            "  ________        __   _________                      \n" +
+            " /  _____/  _____/  |_ \\_   ___ \\  ____ ______ ___.__.\n" +
+            "/   \\  ____/ __ \\   __\\/    \\  \\/ /  _ \\\\____ <   |  |\n" +
+            "\\    \\_\\  \\  ___/|  |  \\     \\___(  <_> )  |_> >___  |\n" +
+            " \\______  /\\___  >__|   \\______  /\\____/|   __// ____|\n" +
+            "        \\/     \\/              \\/       |__|   \\/    ";
 }
 
