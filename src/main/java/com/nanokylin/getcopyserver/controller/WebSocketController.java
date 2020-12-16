@@ -35,13 +35,6 @@ public class WebSocketController extends WebSocketServer {
 
     @Override
     public void onOpen(WebSocket connect, ClientHandshake handshake) {
-
-        ///////////////////////// Test ////////////////////////////
-        connect.send("== 欢迎连接CatPawServer ==");
-        connect.send("Github: https://github.com/hanbings/CatPawServer");
-        connect.send("===================");
-        ////////////////////////////////////////////////////////////
-        broadcast("新连接: " + handshake.getResourceDescriptor());
         log.info("新连接: " + connect.getRemoteSocketAddress());
 
     }

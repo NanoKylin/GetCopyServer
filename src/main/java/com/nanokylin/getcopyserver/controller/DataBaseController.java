@@ -22,6 +22,6 @@ class DataBaseThread extends Thread {
     public void run() {
         super.setName("DataBaseThread");
         DataBaseService dataBaseService = new SQLiteDataBaseImpl();
-        Resources.SQLLiteConnection = dataBaseService.loadDataBase("data/catnote.db");
+        Resources.SQLLiteConnection = dataBaseService.loadDataBase("data/copy.db");
     }
 }
