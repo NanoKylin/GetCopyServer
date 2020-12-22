@@ -25,7 +25,7 @@ public class DependFile {
         // 配置文件
         Resources.DependFile.add("./config.yml");
         // 初始SQLite数据库
-        Resources.DependFile.add("data/copy.db");
+        Resources.DependFile.add("./data/copy.db");
 
     }
 

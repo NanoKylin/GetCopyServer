@@ -7,6 +7,8 @@ public class ConsoleServiceImpl implements ConsoleService {
     public void execute(String command) {
         if (command.contains("help")) {
             System.out.println("假装这是一个help");
+        } else if (command.contains("exit")) {
+            System.exit(0);
         }
     }
 }

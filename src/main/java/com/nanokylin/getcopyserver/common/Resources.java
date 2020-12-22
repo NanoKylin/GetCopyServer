@@ -6,6 +6,7 @@ import org.java_websocket.WebSocket;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * 存储一部分的Static变量到这里
@@ -22,6 +23,8 @@ public class Resources {
     public static HashMap<String, Object> LanguageMap = new HashMap<>();
     // WebSocket连接池Map
     public static HashMap<WebSocket, String> WebSocketUserMap = new HashMap<>();
+    // 用户内容
+    public static HashMap<String, List<String>> UserContext = new HashMap<>();
 
     // ################ Thread Info ################ //
     // 当线程数小于 corePoolSize时，创建线程执行任务
