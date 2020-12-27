@@ -16,6 +16,9 @@ import org.java_websocket.server.WebSocketServer;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class WebSocketController extends WebSocketServer {
     private static final LogUtil log = new LogUtil();
@@ -50,6 +53,7 @@ public class WebSocketController extends WebSocketServer {
 
     @Override
     public void onMessage(WebSocket connect, String message) {
+        // TODO： 重构此处逻辑
         if (message.length() > 6) {
             if (message.substring(0, 3).contains(Protocol.PACKAGE_HEAD)) {
                 if (message.substring(3, 4).contains(Protocol.CLIENT)) {
@@ -62,7 +66,11 @@ public class WebSocketController extends WebSocketServer {
                         userJoin(connect, root.get("username").getAsString());
                         ArrayList<String> list = new ArrayList<>();
                         Resources.UserContext.put(root.get("username").getAsString(), list);
-                        connect.send(Protocol.PACKAGE_HEAD + Protocol.SERVER + Protocol.SERVER_LOGIN + "{\"context\":\"LOGIN SUCCESSFUL\"}" + Protocol.PACKAGE_END);
+                        ////////
+                        List<WebSocket> userKeyList = getKey(Resources.WebSocketUserMap, root.get("username").getAsString());
+                        for (WebSocket webSocket : userKeyList) {
+                            webSocket.send(Protocol.PACKAGE_HEAD + Protocol.SERVER + Protocol.SERVER_LOGIN + "{\"context\":\"LOGIN SUCCESSFUL\"}" + Protocol.PACKAGE_END);
+                        }
                     }
                     if (message.substring(4, 6).contains(Protocol.CLIENT_PUT_CONTEXT)) {
                         //message.substring(6, message.length() - 2)
@@ -72,7 +80,11 @@ public class WebSocketController extends WebSocketServer {
                         String username = root.get("username").getAsString();
                         if (Resources.UserContext.containsKey(username)) {
                             Resources.UserContext.get(username).add(root.get("context").getAsString());
-                            connect.send(Protocol.PACKAGE_HEAD + Protocol.SERVER + Protocol.SERVER_SEND_CONTEXT + "{\"username\":\"hanbings\",\"context\":" + root.get("context").getAsString() + ",\"picture\":\"12345678\"}" + Protocol.PACKAGE_END);
+                            ////////
+                            List<WebSocket> userKeyList = getKey(Resources.WebSocketUserMap, root.get("username").getAsString());
+                            for (WebSocket webSocket : userKeyList) {
+                                webSocket.send(Protocol.PACKAGE_HEAD + Protocol.SERVER + Protocol.SERVER_SEND_CONTEXT + "{\"username\":\"hanbings\",\"context\":" + root.get("context").getAsString() + ",\"picture\":\"12345678\"}" + Protocol.PACKAGE_END);
+                            }
                         }
                     }
                     if (message.substring(4, 6).contains(Protocol.CLIENT_GET_ALL_CONTEXT)) {
@@ -83,7 +95,11 @@ public class WebSocketController extends WebSocketServer {
                         String username = root.get("username").getAsString();
                         if (Resources.UserContext.containsKey(username)) {
                             for (int i = 0; i < Resources.UserContext.get(username).size(); i++) {
-                                connect.send(Protocol.PACKAGE_HEAD + Protocol.SERVER + Protocol.SERVER_SEND_CONTEXT + "{\"username\":\"hanbings\",\"context\":" + Resources.UserContext.get(username).get(i) + ",\"picture\":\"12345678\"}" + Protocol.PACKAGE_END);
+                                ////////
+                                List<WebSocket> userKeyList = getKey(Resources.WebSocketUserMap, root.get("username").getAsString());
+                                for (WebSocket webSocket : userKeyList) {
+                                    webSocket.send(Protocol.PACKAGE_HEAD + Protocol.SERVER + Protocol.SERVER_SEND_CONTEXT + "{\"username\":\"hanbings\",\"context\":" + Resources.UserContext.get(username).get(i) + ",\"picture\":\"12345678\"}" + Protocol.PACKAGE_END);
+                                }
                             }
                         }
                     }
@@ -127,6 +143,16 @@ public class WebSocketController extends WebSocketServer {
      */
     public void userJoin(WebSocket connect, String userName) {
         webSocketPoolService.addUser(userName, connect);
+    }
+
+    public static List<WebSocket> getKey(Map map, Object value) {
+        List<WebSocket> keyList = new ArrayList<>();
+        for (Object key : map.keySet()) {
+            if (map.get(key).equals(value)) {
+                keyList.add((WebSocket) key);
+            }
+        }
+        return keyList;
     }
 }
 
